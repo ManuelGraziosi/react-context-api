@@ -1,18 +1,28 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useBudget } from "../contexts/BudgetContext";
 
 function Prodotti() {
   const [recivedProducts, setRecivedProducts] = useState(null);
 
+  const { budgetMode } = useBudget();
+
   useEffect(() => {
     axios.get("https://fakestoreapi.com/products").then((resp) => {
       console.log(resp.data);
-      setRecivedProducts(resp.data);
+      if (budgetMode) {
+        setRecivedProducts(
+          resp.data.filter((curProduct) => curProduct.price <= 30)
+        );
+      } else {
+        setRecivedProducts(resp.data);
+      }
     });
-  }, []);
+  }, [budgetMode]);
 
   const navigate = useNavigate();
+
   return (
     <>
       <div className="container py-5">
