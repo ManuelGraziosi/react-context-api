@@ -22,4 +22,4 @@ function useBudget() {
   return context;
 }
 
-export { BudgetContext, useContext };
+export { BudgetProvider, useBudget };

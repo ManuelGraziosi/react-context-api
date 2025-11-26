@@ -5,12 +5,12 @@ import ChiSiamo from "./Pages/ChiSiamo";
 import Prodotti from "./Pages/Prodotti";
 import NotFound from "./Pages/NotFound";
 import DettagliProdotto from "./Pages/DettagliProdotto";
-import { BudgetContext } from "./contexts/BudgetContext";
+import { BudgetProvider } from "./contexts/BudgetContext";
 
 function App() {
   return (
     <>
-      <BudgetContext>
+      <BudgetProvider>
         <BrowserRouter>
           <Routes>
             <Route element={<DefaultLayout />}>
@@ -22,7 +22,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </BudgetContext>
+      </BudgetProvider>
     </>
   );
 }

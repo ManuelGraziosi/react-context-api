@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import { useBudget } from "../contexts/BudgetContext";
 
 function Header() {
   const navLinks = [
@@ -15,6 +16,18 @@ function Header() {
       path: "/prodotti",
     },
   ];
+
+  const { budgetMode, setBudgetMode } = useBudget();
+
+  function handleBudgetClick() {
+    // si può fare con ! l'effetto toogle, per chiarezza fuznioen esplicita
+    if (budgetMode) {
+      setBudgetMode(false);
+    } else {
+      setBudgetMode(true);
+    }
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -50,6 +63,17 @@ function Header() {
                 <NavLink className="nav-link disabled" aria-disabled="true">
                   Coming soon...
                 </NavLink>
+              </li>
+              <li>
+                <button
+                  className="btn btn-warning"
+                  type="button"
+                  onClick={handleBudgetClick}
+                >
+                  {budgetMode
+                    ? "Attiva Modalità Budget"
+                    : "Disattiva Modalità Budget"}
+                </button>
               </li>
             </ul>
           </div>
